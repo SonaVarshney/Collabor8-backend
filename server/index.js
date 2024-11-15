@@ -1,4 +1,5 @@
-// index.js
+import userRoute from "./routes/User";
+
 const express = require("express");
 const mongoose = require("mongoose");
 require("dotenv").config();
@@ -7,7 +8,7 @@ const commentRoute = require("./routes/commentRoutes");
 
 const app = express();
 
-// Routes
+app.use("/api/user", userRoute);
 app.use("/api/event", eventRoute);
 app.use("/api/comments", commentRoute);
 
