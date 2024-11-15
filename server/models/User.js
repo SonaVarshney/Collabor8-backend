@@ -1,43 +1,46 @@
-import mongoose from 'mongoose'; 
+const mongoose = require("mongoose");
 
-const UserSchema = new mongoose.Schema({
+const UserSchema = new mongoose.Schema(
+  {
     name: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     collegeEmail: {
-        type: String,
-        required: true,
-        unique: true
+      type: String,
+      required: true,
+      unique: true,
     },
     enrollmentNumber: {
-        type: String,
-        required: true,
-        unique: true
+      type: String,
+      required: true,
+      unique: true,
     },
     branch: {
-        type: String,
-        enum: ['CSE', 'IT', 'ECE', 'CSE-AI', 'MAE', 'AI-ML', 'ECE-AI'],  // Customize with specific branches
-        required: true
+      type: String,
+      enum: ["CSE", "IT", "ECE", "CSE-AI", "MAE", "AI-ML", "ECE-AI"], // Customize with specific branches
+      required: true,
     },
     year: {
-        type: Date,
-        required: true
+      type: Date,
+      required: true,
     },
     interestedTags: {
-        type: [String],
-        default: []
+      type: [String],
+      default: [],
     },
     subscribedSocieties: {
-        type: [mongoose.Schema.Types.ObjectId],
-        ref: 'Society',
-        default: []
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: "Society",
+      default: [],
     },
     rsvpdEvents: {
-        type: [mongoose.Schema.Types.ObjectId],
-        ref: 'Event',
-        default: []
-    }
-});
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: "Event",
+      default: [],
+    },
+  },
+  { timestamps: true }
+);
 
-module.exports = mongoose.model('User', UserSchema);
+module.exports = mongoose.model("User", UserSchema);
