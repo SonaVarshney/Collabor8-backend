@@ -1,12 +1,18 @@
 // index.js
 const express = require("express");
+const mongoose = require("mongoose");
+require("dotenv").config();
+const eventRoute = require("./routes/eventRoutes");
+const commentRoute = require("./routes/commentRoutes");
+
 const app = express();
-const port = 3000;
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+// Routes
+app.use("/api/event", eventRoute);
+app.use("/api/comments", commentRoute);
 
-app.listen(port, () => {
-  console.log(`App listening at http://localhost:${port}`);
+// Start the server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
