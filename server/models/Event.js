@@ -12,6 +12,7 @@ const eventSchema = new mongoose.Schema(
     description: { type: String, required: true },
     interested: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }], // Reference to User IDs
     organiser: { type: String, required: true },
+    isBarcodeRequired: { type: Boolean, default: false },
   },
   { timestamps: true }
 );
