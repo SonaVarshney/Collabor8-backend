@@ -10,9 +10,13 @@ const app = express();
 // Connect to MongoDB
 connectDB();
 
+// Routes
 app.use("/api/user", userRoute);
 app.use("/api/event", eventRoute);
 app.use("/api/comments", commentRoute);
+
+//Middleware
+app.use(express.json());
 
 // Start the server
 const PORT = process.env.PORT || 3000;
