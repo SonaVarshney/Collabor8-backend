@@ -8,9 +8,16 @@ const eventSchema = new mongoose.Schema(
     location: { type: String, required: true },
     poster: { type: String, required: true }, // URL to the image
     groupLink: { type: String }, // WhatsApp/Discord group link
-    tags: [{ type: String }],
+    tags: {
+      type: [String], 
+      default: []
+    },
     description: { type: String, required: true },
-    interested: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }], // Reference to User IDs
+    interested: {
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: "User", // Reference to User IDs
+      default: []
+    },
     organiser: { type: String, required: true },
     isBarcodeRequired: { type: Boolean, default: false },
   },
@@ -18,3 +25,4 @@ const eventSchema = new mongoose.Schema(
 );
 
 module.exports = mongoose.model("Event", eventSchema);
+

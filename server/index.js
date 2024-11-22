@@ -5,10 +5,13 @@ const eventRoute = require("./routes/eventRoutes");
 const commentRoute = require("./routes/commentRoutes");
 const userRoute = require("./routes/userRoutes");
 const connectDB = require("./utils/database");
+const bodyParser = require("body-parser");
 
 const app = express();
 // Connect to MongoDB
 connectDB();
+
+app.use(bodyParser.json())
 
 // Routes
 app.use("/api/user", userRoute);
