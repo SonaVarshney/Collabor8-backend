@@ -6,6 +6,9 @@ const eventController = require("../controllers/eventController");
 // Create a new event
 router.post("/", eventController.createEvent);
 
+// Get all events
+router.get("/", eventController.getAllEvents);
+
 // Get all events by an organiser
 router.get("/:organizer", eventController.getAllEventsByOrganizer);
 
