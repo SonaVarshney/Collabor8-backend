@@ -1,12 +1,25 @@
 import { StyleSheet, Text, View } from "react-native";
 import EventSearchScreen from "./pages/searchPage";
 
+// Navigation
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/native-stack";
+
+// Screens
+import EventSearchScreen from "./pages/searchPage";
+
+const Stack = createStackNavigator();
+
 export default function App() {
   return (
-    // <View style={styles.container}>
-    //   <Text>Open up App.js to start working on your app!</Text>
-    // </View>
-    <EventSearchScreen />
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen 
+        name="Search" 
+        component={EventSearchScreen} 
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
