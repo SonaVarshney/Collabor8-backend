@@ -96,3 +96,31 @@ exports.getEventsByTag = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+//  Search events by event name or tags
+exports.searchEvents = async (req, res) => {
+  const { query } = req.query;
+
+  if (!query) {
+    return res.status(400).send({ message: "Query is required" });
+  }
+
+  try {
+    // Search by event name or tags using regex for case-insensitive matching
+    const events = await Event.find({
+      $or: [
+        { eventName: { $regex: query, $options: "i" } }, // Case-insensitive search for event name
+        { tags: { $regex: query, $options: "i" } }, // Case-insensitive search for tags
+      ],
+    });
+
+    if (events.length === 0) {
+      return res.status(404).send({ message: "No events found" });
+    }
+
+    res.send(events);
+  } catch (error) {
+    console.error("Error searching events:", error);
+    res.status(500).send({ message: "Internal server error" });
+  }
+};

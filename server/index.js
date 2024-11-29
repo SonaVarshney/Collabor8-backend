@@ -1,13 +1,13 @@
 const express = require("express");
 const mongoose = require("mongoose");
 require("dotenv").config();
-
+const cors = require("cors");
 
 const eventRoute = require("./routes/eventRoutes");
 const commentRoute = require("./routes/commentRoutes");
 const userRoute = require("./routes/userRoutes");
-const societyRoute = require('./routes/societyRoutes');
-const authRoute = require('./routes/authRoutes')
+const societyRoute = require("./routes/societyRoutes");
+const authRoute = require("./routes/authRoutes");
 
 const connectDB = require("./utils/database");
 const bodyParser = require("body-parser");
@@ -16,7 +16,8 @@ const app = express();
 // Connect to MongoDB
 connectDB();
 
-app.use(bodyParser.json())
+app.use(bodyParser.json());
+app.use(cors());
 
 // Routes
 app.use("/api/user", userRoute);

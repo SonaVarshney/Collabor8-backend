@@ -27,4 +27,7 @@ router.post("/interest/:id", eventController.markInterest);
 //get all events by tag
 router.get("/tag/:tag", eventController.getEventsByTag);
 
+//Unified search by event name or tags
+router.get("/search", eventController.searchEvents);
+
 module.exports = router;
