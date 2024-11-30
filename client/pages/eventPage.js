@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, ImageBackground, StyleSheet, ActivityIndicator } from 'react-native';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 const EventPage = ({route}) => {
     const [event, setEvent] = useState(null);
@@ -36,6 +37,7 @@ const EventPage = ({route}) => {
                 <Text style={styles.text}>{event.description}</Text>
                 <Text style={styles.text}><Text style={styles.bold}>Date:</Text> {event.date}</Text>
                 <Text style={styles.text}><Text style={styles.bold}>Location:</Text> {event.location}</Text>
+                <FontAwesome name="comment" size={24} color="black" />            
             </View>
         </View>
     );
