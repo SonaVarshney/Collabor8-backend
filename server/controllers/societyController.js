@@ -1,13 +1,34 @@
-const Society = require('../models/Society');
+const Society = require("../models/Society");
 
 // Create a new society
 exports.createSociety = async (req, res) => {
   try {
-    const society = new Society(req.body);
-    await society.save();
-    res.status(201).json(society);
+    const { socName, description, socialLinks, socEmail } = req.body;
+
+    if (!socName || !socEmail) {
+      return res
+        .status(400)
+        .json({ message: "Society name and email are required." });
+    }
+
+    const existingSociety = await Society.findOne({ socName });
+    if (existingSociety) {
+      return res
+        .status(400)
+        .json({ error: "Society with this name already exists." });
+    }
+
+    const newSociety = new Society({
+      socName,
+      description,
+      socialLinks,
+      socEmail,
+    });
+
+    await newSociety.save();
+    res.status(201).json({ message: "Society registered successfully." });
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    res.status(500).json({ error: error.message });
   }
 };
 
@@ -35,7 +56,9 @@ exports.getSocietyById = async (req, res) => {
 // Update a society by ID
 exports.updateSociety = async (req, res) => {
   try {
-    const society = await Society.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    const society = await Society.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
     if (!society) return res.status(404).json({ message: "Society not found" });
     res.json(society);
   } catch (error) {

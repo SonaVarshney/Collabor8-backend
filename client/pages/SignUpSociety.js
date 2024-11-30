@@ -1,0 +1,136 @@
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  Alert,
+} from "react-native";
+import axios from "axios";
+
+const SocietySignUp = () => {
+  const [socName, setSocName] = useState("");
+  const [description, setDescription] = useState("");
+  const [socialLinks, setSocialLinks] = useState("");
+  const [socEmail, setSocEmail] = useState("");
+
+  const handleSocietySignUp = async () => {
+    if (!socName || !socEmail) {
+      Alert.alert("Error", "Please fill in the required fields.");
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        "http://172.16.77.10:3000/api/society/",
+        {
+          socName,
+          description,
+          socialLinks: socialLinks.split(",").map((link) => link.trim()),
+          socEmail,
+        }
+      );
+
+      Alert.alert("Success", "Society registered successfully!");
+    } catch (error) {
+      Alert.alert("Error", error.response?.data?.error || error.message);
+    }
+  };
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.card}>
+        <Text style={styles.title}>Register Your Society</Text>
+
+        <TextInput
+          style={styles.input}
+          placeholder="Society Name (required)"
+          value={socName}
+          onChangeText={setSocName}
+        />
+
+        <TextInput
+          style={[styles.input, styles.multiLineInput]}
+          placeholder="Description (optional)"
+          value={description}
+          onChangeText={setDescription}
+          multiline
+          numberOfLines={3}
+        />
+
+        <TextInput
+          style={styles.input}
+          placeholder="Social Links (comma-separated)"
+          value={socialLinks}
+          onChangeText={setSocialLinks}
+        />
+
+        <TextInput
+          style={styles.input}
+          placeholder="Society Email (required)"
+          value={socEmail}
+          onChangeText={setSocEmail}
+          keyboardType="email-address"
+        />
+
+        <TouchableOpacity style={styles.button} onPress={handleSocietySignUp}>
+          <Text style={styles.buttonText}>Register Society</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#f5f5f5",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  card: {
+    width: "90%",
+    backgroundColor: "#ffffff",
+    borderRadius: 10,
+    padding: 20,
+    shadowColor: "#000",
+    shadowOpacity: 0.1,
+    shadowOffset: { width: 0, height: 4 },
+    shadowRadius: 10,
+    elevation: 5,
+  },
+  title: {
+    fontSize: 22,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: 20,
+    color: "#333",
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: "#ddd",
+    padding: 12,
+    borderRadius: 8,
+    marginBottom: 15,
+    fontSize: 16,
+    backgroundColor: "#f9f9f9",
+  },
+  multiLineInput: {
+    height: 80,
+    textAlignVertical: "top",
+  },
+  button: {
+    backgroundColor: "#0077b6",
+    padding: 15,
+    borderRadius: 8,
+    alignItems: "center",
+  },
+  buttonText: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+});
+
+export default SocietySignUp;

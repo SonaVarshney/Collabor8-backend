@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const bcrypt = require("bcrypt"); 
+const bcrypt = require("bcrypt");
 
 const UserSchema = new mongoose.Schema(
   {
@@ -13,9 +13,9 @@ const UserSchema = new mongoose.Schema(
       unique: true,
     },
     password: {
-      type: String, 
-      required: true
-    }, 
+      type: String,
+      required: true,
+    },
     enrollmentNumber: {
       type: String,
       required: true,
@@ -27,7 +27,7 @@ const UserSchema = new mongoose.Schema(
       required: true,
     },
     year: {
-      type: Date,
+      type: Number,
       required: true,
     },
     interestedTags: {
@@ -49,8 +49,8 @@ const UserSchema = new mongoose.Schema(
 );
 
 // Hash the password before saving the user
-UserSchema.pre('save', async function (next) {
-  if (!this.isModified('password')) return next();
+UserSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) return next();
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
   next();

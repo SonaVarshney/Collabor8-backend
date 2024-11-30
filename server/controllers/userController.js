@@ -20,14 +20,61 @@ exports.getUserById = async (req, res) => {
   }
 };
 
-// Create a new user
 exports.createUser = async (req, res) => {
-  const user = new User(req.body);
   try {
-    const newUser = await user.save();
-    res.status(201).json(newUser);
+    const {
+      name,
+      collegeEmail,
+      password,
+      enrollmentNumber,
+      branch,
+      year,
+      interestedTags,
+    } = req.body;
+
+    // Check for required fields
+    if (
+      !name ||
+      !collegeEmail ||
+      !password ||
+      !enrollmentNumber ||
+      !branch ||
+      !year
+    ) {
+      return res.status(400).json({ error: "All fields are required" });
+    }
+
+    // Check if user already exists
+    const existingUser = await User.findOne({ collegeEmail });
+    if (existingUser) {
+      return res
+        .status(400)
+        .json({ error: "User already exists with this email" });
+    }
+
+    const existingUserWithEnrollment = await User.findOne({ enrollmentNumber });
+    if (existingUserWithEnrollment) {
+      return res
+        .status(400)
+        .json({ error: "User already exists with this Enrollment Number" });
+    }
+
+    // Create a new user
+    const user = new User({
+      name,
+      collegeEmail,
+      password,
+      enrollmentNumber,
+      branch,
+      year: new Date(year), // Convert year to Date format
+      interestedTags: interestedTags || [],
+    });
+
+    // Save user to database
+    await user.save();
+    res.status(201).json({ message: "User created successfully" });
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    res.status(500).json({ error: error.message });
   }
 };
 
