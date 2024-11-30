@@ -1,4 +1,6 @@
 const User = require("../models/User");
+const mongoose = require("mongoose");
+
 // Get all users
 exports.getAllUsers = async (req, res) => {
   try {
@@ -12,7 +14,9 @@ exports.getAllUsers = async (req, res) => {
 // Get a single user by ID
 exports.getUserById = async (req, res) => {
   try {
-    const user = await User.findById(req.params.id);
+    //convert the id to a mongoose object id
+    id = new mongoose.Types.ObjectId(req.params.id.toString());
+    const user = await User.findById(id);
     if (!user) return res.status(404).json({ message: "User not found" });
     res.status(200).json(user);
   } catch (error) {
