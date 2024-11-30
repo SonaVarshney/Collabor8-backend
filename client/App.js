@@ -15,7 +15,7 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="selectRole"> 
+      <Stack.Navigator initialRouteName="SelectRole"> 
         <Stack.Screen name="SelectRole" component={SelectRole} /> 
         <Stack.Screen name="EventSearch" component={EventSearchScreen} />
         <Stack.Screen name="SignUp" component={SignUp} />
