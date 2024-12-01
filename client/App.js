@@ -20,7 +20,7 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="CreateEvent">
+      <Stack.Navigator initialRouteName="SelectRole">
         <Stack.Screen name="LogInUser" component={LogInUser} />
         <Stack.Screen name="LogInSociety" component={LogInSociety} />
         <Stack.Screen name="SelectRole" component={SelectRole} />
