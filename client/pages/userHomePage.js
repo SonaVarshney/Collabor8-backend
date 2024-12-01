@@ -15,17 +15,15 @@ import Entypo from "@expo/vector-icons/Entypo";
 import { useNavigation } from "@react-navigation/native";
 import { API_URL } from "@env";
 
-const UserHomePage = ({ routes }) => {
+const UserHomePage = ({ route }) => {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState({});
   const navigation = useNavigation();
 
-  const { userid } = routes.params;
+  const { userid } = route.params;
 
-  useEffect(() => {
-    fetchEvents();
-  }, []);
+  console.log(userid);
 
   const fetchEvents = async () => {
     try {
