@@ -13,7 +13,7 @@ import { useNavigation } from "@react-navigation/native";
 const LogInUser = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigation = useNavigation(); 
+  const navigation = useNavigation();
 
   const handleLogin = async () => {
     if (!email || !password) {
@@ -23,10 +23,13 @@ const LogInUser = () => {
 
     try {
       // Send login request to the backend
-      const response = await axios.post("http://192.168.1.7:3000/api/user/login", {
-        collegeEmail: email,
-        password,
-      });
+      const response = await axios.post(
+        "http://192.168.1.37:3000/api/user/login",
+        {
+          collegeEmail: email,
+          password,
+        }
+      );
 
       // Handle successful login
       Alert.alert("Success", `Welcome back, ${response.data.user.name}!`);
@@ -39,7 +42,8 @@ const LogInUser = () => {
       console.error("Login error:", error);
       Alert.alert(
         "Error",
-        error.response?.data?.message || "Unable to authenticate. Please try again."
+        error.response?.data?.message ||
+          "Unable to authenticate. Please try again."
       );
     }
   };

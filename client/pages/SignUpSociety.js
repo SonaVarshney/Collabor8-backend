@@ -25,7 +25,7 @@ const SocietySignUp = () => {
 
     try {
       const response = await axios.post(
-        "http://192.168.1.7:3000/api/society/",
+        "http://192.168.1.37:3000/api/society/",
         {
           socName,
           description,
@@ -35,7 +35,7 @@ const SocietySignUp = () => {
       );
 
       Alert.alert("Success", "Society registered successfully!");
-      
+
       // Redirect to login screen after successful signup
       navigation.navigate("LogInSociety"); // Replace with your actual login screen name
     } catch (error) {

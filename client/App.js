@@ -19,15 +19,47 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="SelectRole">
-        <Stack.Screen name="LogInUser" component={LogInUser} />
-        <Stack.Screen name="LogInSociety" component={LogInSociety} />
-        <Stack.Screen name="SelectRole" component={SelectRole} />
-        <Stack.Screen name="EventSearch" component={EventSearchScreen} />
-        <Stack.Screen name="SignUp" component={SignUp} />
-        <Stack.Screen name="SocietySignUp" component={SocietySignUp} />
-        <Stack.Screen name="Categories" component={CategoriesPage} />
-        <Stack.Screen name="CategoryEvents" component={CategoryEventsPage} />
+      <Stack.Navigator initialRouteName="Categories">
+        <Stack.Screen
+          name="LogInUser"
+          component={LogInUser}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="LogInSociety"
+          component={LogInSociety}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="SelectRole"
+          component={SelectRole}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="EventSearch"
+          component={EventSearchScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="SignUp"
+          component={SignUp}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="SocietySignUp"
+          component={SocietySignUp}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Categories"
+          component={CategoriesPage}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="CategoryEvents"
+          component={CategoryEventsPage}
+          options={{ headerShown: false }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -13,7 +13,7 @@ import { useNavigation } from "@react-navigation/native";
 const LogInSociety = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState(""); // Keep password input but not use it for backend
-  const navigation = useNavigation(); 
+  const navigation = useNavigation();
 
   const handleLogin = async () => {
     if (!email) {
@@ -23,10 +23,13 @@ const LogInSociety = () => {
 
     try {
       // Send login request to the backend for society login, but only use the email
-      const response = await axios.post("http://192.168.1.7:3000/api/society/login", {
-        socEmail: email, // Send only the email to the backend
-        password, // Sending password but it won't be used by backend
-      });
+      const response = await axios.post(
+        "http://192.168.1.37:3000/api/society/login",
+        {
+          socEmail: email, // Send only the email to the backend
+          password, // Sending password but it won't be used by backend
+        }
+      );
 
       // Handle successful login
       Alert.alert("Success", `Welcome back, ${response.data.society.socName}!`);
@@ -34,12 +37,13 @@ const LogInSociety = () => {
 
       // Redirect to another page or perform additional actions after login
       // Example: Navigate to the society dashboard
-      navigation.navigate("SocietyDashboard");  // Replace "SocietyDashboard" with your desired screen
+      navigation.navigate("SocietyDashboard"); // Replace "SocietyDashboard" with your desired screen
     } catch (error) {
       console.error("Login error:", error);
       Alert.alert(
         "Error",
-        error.response?.data?.message || "Unable to authenticate. Please try again."
+        error.response?.data?.message ||
+          "Unable to authenticate. Please try again."
       );
     }
   };

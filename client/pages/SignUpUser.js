@@ -18,7 +18,7 @@ const SignUp = () => {
   const [branch, setBranch] = useState("");
   const [year, setYear] = useState("");
   const [interestedTags, setInterestedTags] = useState("");
-  const navigation = useNavigation(); 
+  const navigation = useNavigation();
 
   const handleSignUp = async () => {
     if (
@@ -34,7 +34,7 @@ const SignUp = () => {
     }
 
     try {
-      const response = await axios.post("http://192.168.1.7:3000/api/user/", {
+      const response = await axios.post("http://192.168.1.37:3000/api/user/", {
         name,
         collegeEmail,
         password,
