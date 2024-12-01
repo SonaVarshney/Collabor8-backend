@@ -66,7 +66,7 @@ const UserHomePage = ({ route }) => {
   const renderEventCard = ({ item }) => (
     // Click on the event card to view the event details
     <TouchableOpacity
-      onPress={() => navigation.navigate("EventDetails", { id: item._id })}
+      onPress={() => navigation.navigate("EventDetails", { id: item._id, userid: userid })}
     >
       <Card style={styles.card}>
         <Entypo
