@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { View, StyleSheet, FlatList } from "react-native";
 import EventCard from "../components/EventCard";
 
-const API_URL = "http://192.168.1.37:3000/api/event/";
+const API_URL = "http://192.168.1.5:3000/api/event/";
 
 const CategoryEventsPage = ({ route }) => {
   const { category } = route.params;

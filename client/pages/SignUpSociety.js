@@ -25,7 +25,7 @@ const SocietySignUp = () => {
 
     try {
       const response = await axios.post(
-        "http://192.168.1.37:3000/api/society/",
+        "http://192.168.1.5:3000/api/society/",
         {
           socName,
           description,

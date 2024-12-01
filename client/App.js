@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, Image } from "react-native";
 
 // Navigation
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeNativeStackNavigator } from "@react-navigation/native-stack";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 // Screens
 import EventSearchScreen from "./pages/searchPage";

@@ -8,12 +8,10 @@ import {
   Alert,
 } from "react-native";
 import axios from "axios";
-import { useNavigation } from "@react-navigation/native";
 
-const LogInUser = () => {
+const LogInUser = ({navigation}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigation = useNavigation();
 
   const handleLogin = async () => {
     if (!email || !password) {
@@ -24,7 +22,7 @@ const LogInUser = () => {
     try {
       // Send login request to the backend
       const response = await axios.post(
-        "http://192.168.1.37:3000/api/user/login",
+        "http://192.168.1.5:3000/api/user/login",
         {
           collegeEmail: email,
           password,
@@ -33,10 +31,11 @@ const LogInUser = () => {
 
       // Handle successful login
       Alert.alert("Success", `Welcome back, ${response.data.user.name}!`);
-      console.log("Login successful:", response.data);
+      console.log("Login successful:", response.data.user._id);
 
       // Redirect to another page or perform additional actions after login
-      // Example: Navigate to dashboard or home
+      // Example: Replace home so that coming back is not possible
+      navigation.replace("HomePage", { userid: response.data.user._id });
       // navigation.navigate("Home");
     } catch (error) {
       console.error("Login error:", error);

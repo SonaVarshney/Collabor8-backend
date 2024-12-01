@@ -4,13 +4,16 @@ import axios from 'axios';
 import { Card } from 'react-native-paper';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import Entypo from '@expo/vector-icons/Entypo';
+import { useNavigation } from '@react-navigation/native';
 
 
-const UserHomePage = ({navigation}) => {
+const UserHomePage = ({routes}) => {
     const [events, setEvents] = useState([]);
     const [loading, setLoading] = useState(true);
     const [user, setUser] = useState({});
-    const id = "674a0aa17779aa90fe26a02f"; 
+    const navigation = useNavigation();
+
+    const { userid } = routes.params;
 
     useEffect(() => {
         fetchEvents();
@@ -20,7 +23,7 @@ const UserHomePage = ({navigation}) => {
         try {
             // Use axios to fetch data from the backend
             // const response = await axios.get(`http://192.168.1.5:3000/api/event`); 
-            const response = await axios.get(`http://192.168.1.5:3000/api/user/${id}`);
+            const response = await axios.get(`http://192.168.1.5:3000/api/user/${userid}`);
             setUser(response.data);
             tags = await response.data.interestedTags;
             if (tags.length === 0) {

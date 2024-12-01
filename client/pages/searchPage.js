@@ -23,7 +23,7 @@ const EventSearchScreen = () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `http://192.168.1.37:3000/api/event/tag/${searchTag.toLowerCase()}`
+        `http://192.168.1.5:3000/api/event/tag/${searchTag.toLowerCase()}`
       );
       setEvents(response.data);
     } catch (error) {
