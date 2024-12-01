@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
+import { API_URL } from "@env";
 
 const SignUp = () => {
   const [name, setName] = useState("");
@@ -34,7 +35,7 @@ const SignUp = () => {
     }
 
     try {
-      const response = await axios.post("http://192.168.1.37:3000/api/user/", {
+      const response = await axios.post(`${API_URL}:3000/api/user/`, {
         name,
         collegeEmail,
         password,

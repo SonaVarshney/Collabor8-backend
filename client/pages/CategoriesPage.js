@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import Footer from "../components/Footer";
+import { API_URL } from "@env";
 
 const CategoriesPage = ({ navigation }) => {
   const categories = [

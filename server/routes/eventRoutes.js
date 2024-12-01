@@ -9,11 +9,11 @@ router.post("/", eventController.createEvent);
 // Get all events
 router.get("/", eventController.getAllEvents);
 
-// Get all events by an organiser
-router.get("/:organizer", eventController.getAllEventsByOrganizer);
-
 // Get a specific event by ID
 router.get("/:id", eventController.getEventById);
+
+// Get all events by an organiser
+router.get("/:organizer", eventController.getAllEventsByOrganizer);
 
 // Update an event
 router.put("/:id", eventController.updateEvent);

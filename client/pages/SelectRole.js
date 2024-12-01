@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { API_URL } from "@env";
 
 const SelectRole = ({ navigation }) => {
   const handleRoleSelection = (role) => {
@@ -46,7 +47,7 @@ const styles = StyleSheet.create({
     fontSize: 60,
     fontWeight: "bold",
     fontStyle: "italic",
-    color: "#3D3BF3", 
+    color: "#3D3BF3",
     textAlign: "center",
     marginVertical: 30, // Space above and below
   },
@@ -83,7 +84,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
   },
-  
 });
 
 export default SelectRole;

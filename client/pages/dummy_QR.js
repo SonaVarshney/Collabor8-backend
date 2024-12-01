@@ -8,6 +8,7 @@ import {
   Modal,
   TouchableOpacity,
 } from "react-native";
+import { API_URL } from "@env";
 
 const QRCodeGenerator = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);

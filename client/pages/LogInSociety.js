@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
+import { API_URL } from "@env";
 
 const LogInSociety = () => {
   const [email, setEmail] = useState("");
@@ -23,13 +24,10 @@ const LogInSociety = () => {
 
     try {
       // Send login request to the backend for society login, but only use the email
-      const response = await axios.post(
-        "http://192.168.1.37:3000/api/society/login",
-        {
-          socEmail: email, // Send only the email to the backend
-          password, // Sending password but it won't be used by backend
-        }
-      );
+      const response = await axios.post(`${API_URL}/api/society/login`, {
+        socEmail: email, // Send only the email to the backend
+        password, // Sending password but it won't be used by backend
+      });
 
       // Handle successful login
       Alert.alert("Success", `Welcome back, ${response.data.society.socName}!`);

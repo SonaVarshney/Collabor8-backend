@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Image } from "react-native";
 
 // Navigation
 import { NavigationContainer } from "@react-navigation/native";
@@ -6,6 +6,10 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 // Screens
 import EventSearchScreen from "./pages/searchPage";
+import UserHomePage from "./pages/userHomePage";
+import EventPage from "./pages/eventPage";
+
+import FontAwesome from "@expo/vector-icons/FontAwesome";
 import SignUp from "./pages/SignUpUser";
 import SocietySignUp from "./pages/SignUpSociety";
 import SelectRole from "./pages/SelectRole";
@@ -21,7 +25,7 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="generateQRCode">
+      <Stack.Navigator initialRouteName="Categories">
         <Stack.Screen
           name="LogInUser"
           component={LogInUser}
@@ -72,6 +76,23 @@ export default function App() {
           component={QRCodeGenerator}
           options={{ headerShown: false }}
         />
+
+        <Stack.Screen name="EventDetails" component={EventPage} />
+        <Stack.Screen
+          name="HomePage"
+          component={UserHomePage}
+          options={{
+            title: "Home",
+            headerBackVisible: false,
+            headerBackTitle: "Back",
+            headerRight: () => (
+              <Image
+                source={{ uri: "https://avatar.iran.liara.run/public/girl" }}
+                style={styles.tinyLogo}
+              />
+            ),
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -83,5 +104,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+  },
+  tinyLogo: {
+    width: 50,
+    height: 50,
   },
 });

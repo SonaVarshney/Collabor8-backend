@@ -11,6 +11,7 @@ import {
 import axios from "axios";
 import { Card } from "react-native-paper";
 import SearchBar from "../components/SearchBar"; // Import the custom search bar
+import { API_URL } from "@env";
 
 const EventSearchScreen = () => {
   const [searchTag, setSearchTag] = useState("");
@@ -23,7 +24,7 @@ const EventSearchScreen = () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `http://192.168.1.37:3000/api/event/tag/${searchTag.toLowerCase()}`
+        `${API_URL}/api/event/tag/${searchTag.toLowerCase()}`
       );
       setEvents(response.data);
     } catch (error) {
