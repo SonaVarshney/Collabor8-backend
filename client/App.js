@@ -11,13 +11,15 @@ import SocietySignUp from "./pages/SignUpSociety";
 import SelectRole from "./pages/SelectRole";
 import CategoriesPage from "./pages/CategoriesPage";
 import CategoryEventsPage from "./pages/CategoryEventsPage";
+import LogInUser from "./pages/LogInUser";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Categories">
+      <Stack.Navigator initialRouteName="SelectRole">
+        <Stack.Screen name="LogInUser" component={LogInUser} />
         <Stack.Screen name="SelectRole" component={SelectRole} />
         <Stack.Screen name="EventSearch" component={EventSearchScreen} />
         <Stack.Screen name="SignUp" component={SignUp} />

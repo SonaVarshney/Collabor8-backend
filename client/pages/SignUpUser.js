@@ -8,6 +8,7 @@ import {
   Alert,
 } from "react-native";
 import axios from "axios";
+import { useNavigation } from "@react-navigation/native";
 
 const SignUp = () => {
   const [name, setName] = useState("");
@@ -17,6 +18,7 @@ const SignUp = () => {
   const [branch, setBranch] = useState("");
   const [year, setYear] = useState("");
   const [interestedTags, setInterestedTags] = useState("");
+  const navigation = useNavigation(); 
 
   const handleSignUp = async () => {
     if (
@@ -32,7 +34,7 @@ const SignUp = () => {
     }
 
     try {
-      const response = await axios.post("http://172.16.77.10:3000/api/user/", {
+      const response = await axios.post("http://192.168.1.7:3000/api/user/", {
         name,
         collegeEmail,
         password,
@@ -41,7 +43,11 @@ const SignUp = () => {
         year,
         interestedTags: interestedTags.split(",").map((tag) => tag.trim()),
       });
-      Alert.alert("Success", "User registered successfully!");
+      Alert.alert(
+        "Success",
+        "Account created successfully! Please log in to get started."
+      );
+      navigation.navigate("LogInUser"); // Redirect to login page
     } catch (error) {
       Alert.alert("Error", error.response?.data?.error || error.message);
     }

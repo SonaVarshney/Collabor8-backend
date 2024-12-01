@@ -1,4 +1,6 @@
 const User = require("../models/User");
+const bcrypt = require("bcrypt");
+
 // Get all users
 exports.getAllUsers = async (req, res) => {
   try {
@@ -103,3 +105,29 @@ exports.deleteUser = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+// User login
+exports.loginUser = async (req, res) => {
+  const { collegeEmail, password } = req.body;
+
+  try {
+    // Find user by college email
+    const user = await User.findOne({ collegeEmail });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Compare the input password with the hashed password in the database
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ message: "Invalid email or password" });
+    }
+
+    // Successful login response
+    res.status(200).json({ message: "Login successful", user });
+  } catch (error) {
+    console.error("Error during login:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+

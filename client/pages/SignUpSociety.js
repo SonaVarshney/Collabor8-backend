@@ -23,7 +23,7 @@ const SocietySignUp = () => {
 
     try {
       const response = await axios.post(
-        "http://172.16.77.10:3000/api/society/",
+        "http://192.168.1.7:3000/api/society/",
         {
           socName,
           description,
