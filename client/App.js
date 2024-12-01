@@ -13,19 +13,21 @@ import CategoriesPage from "./pages/CategoriesPage";
 import CategoryEventsPage from "./pages/CategoryEventsPage";
 import LogInUser from "./pages/LogInUser";
 import LogInSociety from "./pages/LogInSociety";
+import CreateEvent from "./pages/CreateEvent";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="SelectRole">
+      <Stack.Navigator initialRouteName="CreateEvent">
         <Stack.Screen name="LogInUser" component={LogInUser} />
         <Stack.Screen name="LogInSociety" component={LogInSociety} />
         <Stack.Screen name="SelectRole" component={SelectRole} />
         <Stack.Screen name="EventSearch" component={EventSearchScreen} />
         <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen name="SocietySignUp" component={SocietySignUp} />
+        <Stack.Screen name="CreateEvent" component={CreateEvent} />
         <Stack.Screen name="Categories" component={CategoriesPage} />
         <Stack.Screen name="CategoryEvents" component={CategoryEventsPage} />
       </Stack.Navigator>
