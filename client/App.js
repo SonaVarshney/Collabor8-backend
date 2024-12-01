@@ -9,7 +9,7 @@ import EventSearchScreen from "./pages/searchPage";
 import UserHomePage from "./pages/userHomePage";
 import EventPage from "./pages/eventPage";
 
-import FontAwesome from '@expo/vector-icons/FontAwesome';
+import FontAwesome from "@expo/vector-icons/FontAwesome";
 import SignUp from "./pages/SignUpUser";
 import SocietySignUp from "./pages/SignUpSociety";
 import SelectRole from "./pages/SelectRole";
@@ -18,6 +18,7 @@ import CategoryEventsPage from "./pages/CategoryEventsPage";
 import LogInUser from "./pages/LogInUser";
 import LogInSociety from "./pages/LogInSociety";
 import CreateEvent from "./pages/CreateEvent";
+import QRCodeGenerator from "./pages/dummy_QR";
 
 const Stack = createNativeStackNavigator();
 
@@ -70,24 +71,27 @@ export default function App() {
           component={CreateEvent}
           options={{ headerShown: false }}
         />
-        <Stack.Screen 
-        name="EventDetails" 
-        component={EventPage} 
+        <Stack.Screen
+          name="generateQRCode"
+          component={QRCodeGenerator}
+          options={{ headerShown: false }}
         />
-        <Stack.Screen 
-        name="HomePage" 
-        component={UserHomePage}
-        options={{
-          title: 'Home',
-          headerBackVisible: false,
-          headerBackTitle: 'Back',
-          headerRight: () => (
-            <Image 
-              source={{ uri: 'https://avatar.iran.liara.run/public/girl'}}
-              style={styles.tinyLogo}
-            />      
-          )
-        }}
+
+        <Stack.Screen name="EventDetails" component={EventPage} />
+        <Stack.Screen
+          name="HomePage"
+          component={UserHomePage}
+          options={{
+            title: "Home",
+            headerBackVisible: false,
+            headerBackTitle: "Back",
+            headerRight: () => (
+              <Image
+                source={{ uri: "https://avatar.iran.liara.run/public/girl" }}
+                style={styles.tinyLogo}
+              />
+            ),
+          }}
         />
       </Stack.Navigator>
     </NavigationContainer>
@@ -104,5 +108,5 @@ const styles = StyleSheet.create({
   tinyLogo: {
     width: 50,
     height: 50,
-  }
+  },
 });

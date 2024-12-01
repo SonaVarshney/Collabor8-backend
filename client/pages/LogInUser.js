@@ -8,8 +8,9 @@ import {
   Alert,
 } from "react-native";
 import axios from "axios";
+import { API_URL } from "@env";
 
-const LogInUser = ({navigation}) => {
+const LogInUser = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -21,13 +22,10 @@ const LogInUser = ({navigation}) => {
 
     try {
       // Send login request to the backend
-      const response = await axios.post(
-        "http://192.168.1.5:3000/api/user/login",
-        {
-          collegeEmail: email,
-          password,
-        }
-      );
+      const response = await axios.post(`${API_URL}/api/user/login`, {
+        collegeEmail: email,
+        password,
+      });
 
       // Handle successful login
       Alert.alert("Success", `Welcome back, ${response.data.user.name}!`);
