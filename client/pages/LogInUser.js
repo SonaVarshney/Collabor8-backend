@@ -32,10 +32,11 @@ const LogInUser = ({navigation}) => {
       // Handle successful login
       Alert.alert("Success", `Welcome back, ${response.data.user.name}!`);
       console.log("Login successful:", response.data.user._id);
+      const userid = response.data.user._id;
 
       // Redirect to another page or perform additional actions after login
       // Example: Replace home so that coming back is not possible
-      navigation.replace("HomePage", { userid: response.data.user._id });
+      navigation.replace("HomePage", { userid: userid });
       // navigation.navigate("Home");
     } catch (error) {
       console.error("Login error:", error);
