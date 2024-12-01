@@ -88,9 +88,14 @@ exports.markInterest = async (req, res) => {
 exports.getEventsByTag = async (req, res) => {
   try {
     const tag = req.params.tag;
-    const events = await Event.find({ tags: tag });
+    const regexPattern = `^${tag}`; // Matches values starting with `tag`
+    const events = await Event.find({
+      tags: { $regex: regexPattern, $options: "i" },
+    });
+
     if (events.length === 0)
       return res.status(404).json({ error: "No events found with this tag" });
+
     res.json(events);
   } catch (error) {
     res.status(500).json({ error: error.message });

@@ -1,25 +1,29 @@
+// EventSearchScreen.js
 import React, { useState } from "react";
 import {
-  View,
   FlatList,
-  Text,
   StyleSheet,
+  Text,
+  View,
   ActivityIndicator,
+  TouchableOpacity,
 } from "react-native";
-import { TextInput, Button, Card, Title, Paragraph } from "react-native-paper";
 import axios from "axios";
+import { Card } from "react-native-paper";
+import SearchBar from "../components/SearchBar"; // Import the custom search bar
 
 const EventSearchScreen = () => {
-  const [searchTag, setSearchTag] = useState(""); // User input for the tag
-  const [events, setEvents] = useState([]); // Events fetched from the backend
+  const [searchTag, setSearchTag] = useState("");
+  const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [clicked, setClicked] = useState(false);
 
   const handleSearch = async () => {
-    if (!searchTag.trim()) return; // Ignore empty search
+    if (!searchTag.trim()) return; // Do nothing if the search bar is empty
     setLoading(true);
     try {
       const response = await axios.get(
-        `http://localhost:3000/api/event/tag/${searchTag.toLowerCase()}` // Convert to lowercase
+        `http://192.168.1.37:3000/api/event/tag/${searchTag.toLowerCase()}`
       );
       setEvents(response.data);
     } catch (error) {
@@ -33,8 +37,8 @@ const EventSearchScreen = () => {
     <Card style={styles.card}>
       <Card.Cover source={{ uri: item.poster }} style={styles.cardImage} />
       <Card.Content>
-        <Title style={styles.cardTitle}>{item.eventName}</Title>
-        <Paragraph style={styles.cardDescription}>{item.description}</Paragraph>
+        <Text style={styles.cardTitle}>{item.eventName}</Text>
+        <Text style={styles.cardDescription}>{item.description}</Text>
         <Text style={styles.cardOrganiser}>Organiser: {item.organiser}</Text>
       </Card.Content>
     </Card>
@@ -42,26 +46,14 @@ const EventSearchScreen = () => {
 
   return (
     <View style={styles.container}>
-      <TextInput
-        label="Search by Tag"
-        placeholder="Enter a keyword, e.g., tech, music"
-        value={searchTag}
-        onChangeText={setSearchTag}
-        style={styles.input}
-        mode="outlined"
+      <SearchBar
+        searchPhrase={searchTag}
+        setSearchPhrase={setSearchTag}
+        onSearch={handleSearch}
+        setClicked={setClicked}
       />
-      <Button
-        mode="contained"
-        onPress={handleSearch}
-        loading={loading}
-        style={styles.button}
-        contentStyle={styles.buttonContent}
-      >
-        Search
-      </Button>
-
       {loading ? (
-        <ActivityIndicator size="large" style={styles.loader} />
+        <ActivityIndicator size="large" color="#6c63ff" style={styles.loader} />
       ) : (
         <FlatList
           data={events}
@@ -82,60 +74,48 @@ const EventSearchScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
-    backgroundColor: "#ffffff",
-  },
-  input: {
-    marginBottom: 16,
-    marginTop: 16, // Prevent touching the top of the screen
-  },
-  button: {
-    marginBottom: 20,
-    borderRadius: 5,
-  },
-  buttonContent: {
-    paddingVertical: 8,
+    paddingTop: 40,
+    paddingLeft: 15,
+    paddingRight: 15,
+    backgroundColor: "#f9f9f9",
   },
   loader: {
     marginTop: 20,
   },
   list: {
-    paddingBottom: 20,
+    padding: 15,
+  },
+  empty: {
+    textAlign: "center",
+    fontSize: 16,
+    // color: "gray",
+    marginTop: 50,
   },
   card: {
     marginBottom: 15,
     borderRadius: 10,
-    shadowColor: "#000",
-    shadowOpacity: 0.1,
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 4,
-    elevation: 3, // For Android shadow
-    backgroundColor: "#fff",
+    elevation: 3,
+    padding: 15,
+    backgroundColor: "#CAE1F9",
   },
   cardImage: {
-    height: 150,
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
+    borderRadius: 10,
+    margin: 5,
+    marginBottom: 10,
   },
   cardTitle: {
     fontSize: 18,
     fontWeight: "bold",
-    marginBottom: 5,
   },
   cardDescription: {
     fontSize: 14,
-    color: "#555",
-    marginBottom: 10,
+    color: "gray",
+    marginTop: 5,
   },
   cardOrganiser: {
-    fontSize: 12,
+    fontSize: 14,
     color: "gray",
-  },
-  empty: {
-    textAlign: "center",
-    marginTop: 50,
-    fontSize: 16,
-    color: "gray",
+    marginTop: 10,
   },
 });
 
