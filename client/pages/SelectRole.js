@@ -1,6 +1,9 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { API_URL } from "@env";
+import { Canvas } from "@react-three/fiber";
+// import ExplosionConfetti from "../components/Confetti";
+import ConfettiCannon from 'react-native-confetti-cannon';
 
 const SelectRole = ({ navigation }) => {
   const handleRoleSelection = (role) => {
@@ -10,6 +13,15 @@ const SelectRole = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+      {/* <Canvas>
+          <mesh>
+            <sphereGeometry />
+            <meshStandardMaterial color="orange" />
+            <pointLight position={[10, 10, 10]} />
+          </mesh> 
+      </Canvas> */}
+
+      <ConfettiCannon count={200} origin={{ x: -10, y: 0 }} />
       <Text style={styles.welcome}>Welcome to</Text>
       <Text style={styles.eventry}>Eventry</Text>
       <Text style={styles.description}>Stay in the loop with all events!</Text>
