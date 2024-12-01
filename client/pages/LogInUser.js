@@ -13,7 +13,7 @@ import { useNavigation } from "@react-navigation/native";
 const LogInUser = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigation = useNavigation(); // Use navigation hook
+  const navigation = useNavigation(); 
 
   const handleLogin = async () => {
     if (!email || !password) {
