@@ -75,7 +75,7 @@ const LogInUser = ({ navigation }) => {
           Are you a new user?{" "}
           <Text
             style={styles.signupLink}
-            onPress={() => navigation.navigate("SignUp")} // Navigate to SignUp
+            onPress={() => navigation.replace("SignUp")} // Navigate to SignUp
           >
             Sign Up
           </Text>
