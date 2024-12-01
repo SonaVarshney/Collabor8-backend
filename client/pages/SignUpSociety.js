@@ -8,12 +8,14 @@ import {
   Alert,
 } from "react-native";
 import axios from "axios";
+import { useNavigation } from "@react-navigation/native"; // Import useNavigation
 
 const SocietySignUp = () => {
   const [socName, setSocName] = useState("");
   const [description, setDescription] = useState("");
   const [socialLinks, setSocialLinks] = useState("");
   const [socEmail, setSocEmail] = useState("");
+  const navigation = useNavigation(); // Use the useNavigation hook
 
   const handleSocietySignUp = async () => {
     if (!socName || !socEmail) {
@@ -23,7 +25,7 @@ const SocietySignUp = () => {
 
     try {
       const response = await axios.post(
-        "http://172.16.77.10:3000/api/society/",
+        "http://192.168.1.7:3000/api/society/",
         {
           socName,
           description,
@@ -33,6 +35,9 @@ const SocietySignUp = () => {
       );
 
       Alert.alert("Success", "Society registered successfully!");
+      
+      // Redirect to login screen after successful signup
+      navigation.navigate("LogInSociety"); // Replace with your actual login screen name
     } catch (error) {
       Alert.alert("Error", error.response?.data?.error || error.message);
     }
@@ -121,7 +126,7 @@ const styles = StyleSheet.create({
     textAlignVertical: "top",
   },
   button: {
-    backgroundColor: "#0077b6",
+    backgroundColor: "#6c63ff",
     padding: 15,
     borderRadius: 8,
     alignItems: "center",

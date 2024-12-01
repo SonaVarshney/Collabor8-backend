@@ -4,7 +4,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 const SelectRole = ({ navigation }) => {
   const handleRoleSelection = (role) => {
     // Navigate to the respective signup page based on the role
-    navigation.navigate(role === "Student" ? "SignUp" : "SocietySignUp");
+    navigation.navigate(role === "Student" ? "LogInUser" : "LogInSociety");
   };
 
   return (

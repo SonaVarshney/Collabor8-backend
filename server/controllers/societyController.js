@@ -76,3 +76,22 @@ exports.deleteSociety = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+//login does not require a password
+exports.loginSociety = async (req, res) => {
+  const { socEmail } = req.body;
+
+  try {
+    // Find society by email
+    const society = await Society.findOne({ socEmail });
+    if (!society) {
+      return res.status(404).json({ message: "Society not found" });
+    }
+
+    // Successful login response (no password validation needed)
+    res.status(200).json({ message: "Login successful", society });
+  } catch (error) {
+    console.error("Error during login:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};

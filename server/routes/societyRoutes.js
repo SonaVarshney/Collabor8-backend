@@ -7,5 +7,6 @@ router.get('/', societyController.getSocieties);
 router.get('/:id', societyController.getSocietyById);
 router.put('/:id', societyController.updateSociety);
 router.delete('/:id', societyController.deleteSociety);
+router.post("/login", societyController.loginSociety);
 
 module.exports = router;
