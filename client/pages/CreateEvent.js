@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import axios from "axios";
+import { useNavigation } from "@react-navigation/native";
 import { API_URL } from "@env";
 
 const CreateEvent = () => {
@@ -22,6 +23,7 @@ const CreateEvent = () => {
   const [tags, setTags] = useState("");
   const [description, setDescription] = useState("");
   const [society, setSociety] = useState("");
+  const navigation = useNavigation();
 
   const handleCreateEvent = async () => {
     if (
@@ -56,6 +58,7 @@ const CreateEvent = () => {
 
       if (response.status === 201) {
         Alert.alert("Success", "Event created successfully!");
+        navigation.pop("SocietyHome"); 
       }
     } catch (error) {
       Alert.alert("Error", error.response?.data?.error || error.message);

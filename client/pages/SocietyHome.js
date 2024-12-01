@@ -49,8 +49,8 @@ const SocietyHome = ({ route }) => {
     }
   };
 
-  const renderEventItem = ({ item }) => (
-    <View style={styles.eventCard}>
+  const renderEventItem = ({ item, isUpcoming }) => (
+    <View style={isUpcoming ? styles.UpcomingEventCard : styles.PastEventCard}>
       <Text style={styles.eventName}>{item.eventName}</Text>
       <Text style={styles.eventDate}>{new Date(item.date).toDateString()}</Text>
       <Text style={styles.eventLocation}>{item.location}</Text>
@@ -72,7 +72,7 @@ const SocietyHome = ({ route }) => {
         {upcomingEvents.length > 0 ? (
           <FlatList
             data={upcomingEvents}
-            renderItem={renderEventItem}
+            renderItem={({ item }) => renderEventItem({ item, isUpcoming: true })}
             keyExtractor={(item) => item._id}
           />
         ) : (
@@ -84,18 +84,18 @@ const SocietyHome = ({ route }) => {
         {pastEvents.length > 0 ? (
           <FlatList
             data={pastEvents}
-            renderItem={renderEventItem}
+            renderItem={({ item }) => renderEventItem({ item, isUpcoming: false })}
             keyExtractor={(item) => item._id}
           />
         ) : (
           <Text style={styles.noEventsText}>No past events found.</Text>
         )}
       </View>
-
+  
       {/* Floating Button to navigate to Create Event */}
       <TouchableOpacity
         style={styles.createEventButton}
-        onPress={() => navigation.navigate("CreateEvent")}
+        onPress={() => navigation.replace("CreateEvent")}
       >
         <Text style={styles.createEventText}>+</Text>
       </TouchableOpacity>
@@ -107,7 +107,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#f5f5f5",
-    padding: 10,
+    padding: 30,
+    marginTop: 50
   },
   section: {
     flex: 1,
@@ -125,8 +126,19 @@ const styles = StyleSheet.create({
     color: "#808080",
     marginBottom: 10,
   },
-  eventCard: {
-    backgroundColor: "#fff",
+  UpcomingEventCard: {
+    backgroundColor: "#DEEFF5",
+    padding: 15,
+    borderRadius: 10,
+    marginBottom: 10,
+    shadowColor: "#000",
+    shadowOpacity: 0.1,
+    shadowOffset: { width: 0, height: 4 },
+    shadowRadius: 5,
+    elevation: 5,
+  },
+  PastEventCard: {
+    backgroundColor: "#E4E0E1",
     padding: 15,
     borderRadius: 10,
     marginBottom: 10,
