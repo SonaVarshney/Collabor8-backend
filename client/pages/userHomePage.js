@@ -14,6 +14,7 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import Entypo from "@expo/vector-icons/Entypo";
 import { useNavigation } from "@react-navigation/native";
 import { API_URL } from "@env";
+import Footer from "../components/Footer";
 
 const UserHomePage = ({ route }) => {
   const [events, setEvents] = useState([]);
@@ -21,9 +22,8 @@ const UserHomePage = ({ route }) => {
   const [user, setUser] = useState({});
   const navigation = useNavigation();
 
-  const { userid } = route.params;
-
-  console.log(userid);
+//   const { userid } = route.params;
+    const userid = "674c97be0a39b0ed88f99b11"; 
 
   const fetchEvents = async () => {
     try {
@@ -33,14 +33,14 @@ const UserHomePage = ({ route }) => {
       setUser(response.data);
       tags = await response.data.interestedTags;
       if (tags.length === 0) {
-        const data = await axios.get(`http://192.168.1.5:3000/api/event`);
+        const data = await axios.get(`${API_URL}/api/event`);
         setEvents(data.data);
       } else {
         //Initialize events set to avoid duplicates
         let tempEvents = new Set();
         for (let i = 0; i < tags.length; i++) {
           const data = await axios.get(
-            `http://192.168.1.5:3000/api/event/tag/${tags[i].toLowerCase()}`
+            `${API_URL}/api/event/tag/${tags[i].toLowerCase()}`
           );
           const eventData = await data.data;
 
@@ -60,10 +60,15 @@ const UserHomePage = ({ route }) => {
     }
   };
 
+  
+    useEffect(() => {
+        fetchEvents();
+    }, []); 
+
   const renderEventCard = ({ item }) => (
     // Click on the event card to view the event details
     <TouchableOpacity
-      onPress={() => navigation.navigate("EventDetails", { id: item._id })}
+      onPress={() => navigation.navigate("EventDetails", { id: item._id, userid: userid })}
     >
       <Card style={styles.card}>
         <Entypo
@@ -107,6 +112,7 @@ const UserHomePage = ({ route }) => {
           contentContainerStyle={styles.list}
         />
       )}
+      <Footer navigation={navigation} />
     </View>
   );
 };

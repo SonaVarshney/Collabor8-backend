@@ -2,12 +2,17 @@ import React, { useState, useEffect } from "react";
 import { View, StyleSheet, FlatList } from "react-native";
 import EventCard from "../components/EventCard";
 import { API_URL } from "@env";
+import Footer from "../components/Footer";
+import { useNavigation } from "@react-navigation/native";
 
 const API_URLL = `${API_URL}/api/event/`;
 
 const CategoryEventsPage = ({ route }) => {
   const { category } = route.params;
   const [events, setEvents] = useState([]);
+
+  const navigation = useNavigation();
+
 
   useEffect(() => {
     fetchEvents();
@@ -54,6 +59,7 @@ const CategoryEventsPage = ({ route }) => {
         keyExtractor={(item) => item._id.toString()}
         renderItem={({ item }) => <EventCard event={item} />}
       />
+      <Footer navigation={navigation}/>
     </View>
   );
 };

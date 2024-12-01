@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   FlatList,
   TextInput,
+  Modal
 } from "react-native";
 import { Card } from "react-native-paper";
 import axios from "axios";
@@ -15,13 +16,21 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import Entypo from "@expo/vector-icons/Entypo";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import { API_URL } from "@env";
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import Footer from "../components/Footer";
+import { useNavigation } from "@react-navigation/native";
 
 const EventPage = ({ route }) => {
   const [event, setEvent] = useState(null);
   const [comments, setComments] = useState("");
   const [commentList, setCommentList] = useState([]);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [qrCodeUrl, setQRCodeUrl] = useState("");
+
   const { id } = route.params;
-  const userid = "674a0aa17779aa90fe26a02f"; // Dummy user ID
+  const userid = "674c97be0a39b0ed88f99b11"; 
+
+  const navigation = useNavigation();
 
   // Fetch event details
   const fetchEventDetails = async () => {
@@ -58,7 +67,7 @@ const EventPage = ({ route }) => {
     }
 
     try {
-      await axios.post(`http://192.168.1.5:3000/api/comments`, {
+      await axios.post(`${API_URL}/api/comments`, {
         eventId: id,
         userId: userid,
         description: comments,
@@ -89,6 +98,20 @@ const EventPage = ({ route }) => {
     return <ActivityIndicator size="large" color="#0000ff" />;
   }
 
+  
+  const generateQRCode = () => {
+    const commonData = "https://example.com"; // Replace with your desired text or URL
+    const apiUrl = `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(
+      commonData
+    )}&size=200x200`;
+    setQRCodeUrl(apiUrl);
+    setIsModalVisible(true); // Show the modal
+  };
+
+  const closeModal = () => {
+    setIsModalVisible(false);
+  };
+
   return (
     <View style={styles.container}>
       <Card style={styles.card}>
@@ -106,7 +129,9 @@ const EventPage = ({ route }) => {
             <Text style={styles.cardOrganiser}>
               Organised by: {event.organiser}
             </Text>
-            <FontAwesome name="comment" size={24} color="black" />
+            <TouchableOpacity onPress={generateQRCode}>
+                <MaterialIcons name="rsvp" size={24} color="black" />
+            </TouchableOpacity>
           </View>
         </Card.Content>
       </Card>
@@ -141,6 +166,26 @@ const EventPage = ({ route }) => {
         )}
         contentContainerStyle={styles.list}
       />
+
+        {/* Modal for displaying the QR code */}
+        <Modal
+        visible={isModalVisible}
+        transparent={true}
+        animationType="slide"
+        onRequestClose={closeModal}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalHeader}>Your QR Code</Text>
+            {qrCodeUrl && (
+              <Image source={{ uri: qrCodeUrl }} style={styles.qrImage} />
+            )}
+            <TouchableOpacity style={styles.closeButton} onPress={closeModal}>
+              <Text style={styles.closeButtonText}>Close</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 };
@@ -236,6 +281,38 @@ const styles = StyleSheet.create({
   list: {
     paddingBottom: 20,
   },
+  modalOverlay: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+  modalContent: {
+    width: 300,
+    padding: 20,
+    backgroundColor: "#fff",
+    borderRadius: 10,
+    alignItems: "center",
+  },
+  modalHeader: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginBottom: 15,
+  },
+  qrImage: {
+    width: 200,
+    height: 200,
+    marginBottom: 20,
+  },
+  closeButton: {
+    backgroundColor: "#007bff",
+    padding: 10,
+    borderRadius: 5,
+  },
+  closeButtonText: {
+    color: "#fff",
+    fontSize: 16,
+  }
 });
 
 export default EventPage;

@@ -6,10 +6,10 @@ const Footer = ({ navigation }) => {
   return (
     <View style={styles.footerContainer}>
       <TouchableOpacity
-        onPress={() => navigation.navigate("Home")}
+        onPress={() => navigation.navigate("HomePage")}
         style={styles.iconContainer}
       >
-        <Ionicons name="home-outline" size={24} color="black" />
+        <Ionicons name="home-outline" size={24} color="purple" />
         <Text style={styles.iconText}>Home</Text>
       </TouchableOpacity>
 
@@ -17,7 +17,7 @@ const Footer = ({ navigation }) => {
         onPress={() => navigation.navigate("EventSearch")}
         style={styles.iconContainer}
       >
-        <Ionicons name="search-outline" size={24} color="black" />
+        <Ionicons name="search-outline" size={24} color="purple" />
         <Text style={styles.iconText}>Search</Text>
       </TouchableOpacity>
 

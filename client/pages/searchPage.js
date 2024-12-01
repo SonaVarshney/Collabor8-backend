@@ -1,5 +1,5 @@
 // EventSearchScreen.js
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   FlatList,
   StyleSheet,
@@ -12,12 +12,16 @@ import axios from "axios";
 import { Card } from "react-native-paper";
 import SearchBar from "../components/SearchBar"; // Import the custom search bar
 import { API_URL } from "@env";
+import Footer from "../components/Footer";
+import { useNavigation } from "@react-navigation/native";
 
 const EventSearchScreen = () => {
   const [searchTag, setSearchTag] = useState("");
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(false);
   const [clicked, setClicked] = useState(false);
+
+  const navigation = useNavigation();
 
   const handleSearch = async () => {
     if (!searchTag.trim()) return; // Do nothing if the search bar is empty
@@ -45,6 +49,12 @@ const EventSearchScreen = () => {
     </Card>
   );
 
+  useEffect(() => {
+    axios.get(`${API_URL}/api/event`).then((response) => {
+      setEvents(response.data);
+    }); // Fetch all events on component mount
+  }, []);
+
   return (
     <View style={styles.container}>
       <SearchBar
@@ -68,6 +78,7 @@ const EventSearchScreen = () => {
           }
         />
       )}
+      <Footer navigation={navigation}/>
     </View>
   );
 };
