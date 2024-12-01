@@ -17,6 +17,8 @@ import Entypo from "@expo/vector-icons/Entypo";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import { API_URL } from "@env";
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import Footer from "../components/Footer";
+import { useNavigation } from "@react-navigation/native";
 
 const EventPage = ({ route }) => {
   const [event, setEvent] = useState(null);
@@ -25,7 +27,10 @@ const EventPage = ({ route }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [qrCodeUrl, setQRCodeUrl] = useState("");
 
-  const { id, userid } = route.params;
+  const { id } = route.params;
+  const userid = "674c97be0a39b0ed88f99b11"; 
+
+  const navigation = useNavigation();
 
   // Fetch event details
   const fetchEventDetails = async () => {

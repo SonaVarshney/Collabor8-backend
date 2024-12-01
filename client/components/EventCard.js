@@ -1,17 +1,21 @@
 import React from "react";
 import { Card } from "react-native-paper";
-import { StyleSheet, Text } from "react-native";
+import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 const EventCard = ({ event }) => {
+  const navigation = useNavigation(); 
   return (
-    <Card style={styles.card}>
-      <Card.Cover source={{ uri: event.poster }} style={styles.cardImage} />
-      <Card.Content>
-        <Text style={styles.cardTitle}>{event.eventName}</Text>
-        <Text style={styles.cardDescription}>{event.description}</Text>
-        <Text style={styles.cardOrganiser}>Organiser: {event.organiser}</Text>
-      </Card.Content>
-    </Card>
+    <TouchableOpacity onPress={() => navigation.navigate("EventDetails", {id: event._id})}>
+      <Card style={styles.card}>
+        <Card.Cover source={{ uri: event.poster }} style={styles.cardImage} />
+        <Card.Content>
+          <Text style={styles.cardTitle}>{event.eventName}</Text>
+          <Text style={styles.cardDescription}>{event.description}</Text>
+          <Text style={styles.cardOrganiser}>Organiser: {event.organiser}</Text>
+        </Card.Content>
+      </Card>
+    </TouchableOpacity>
   );
 };
 

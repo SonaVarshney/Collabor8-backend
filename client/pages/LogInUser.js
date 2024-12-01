@@ -29,7 +29,7 @@ const LogInUser = ({ navigation }) => {
 
       // Handle successful login
       Alert.alert("Success", `Welcome back, ${response.data.user.name}!`);
-      console.log("Login successful:", response.data.user._id);
+      console.log("Login successful:", response.data.user);
       const userid = response.data.user._id;
 
       // Redirect to another page or perform additional actions after login

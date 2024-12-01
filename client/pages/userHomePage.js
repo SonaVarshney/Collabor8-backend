@@ -14,6 +14,7 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import Entypo from "@expo/vector-icons/Entypo";
 import { useNavigation } from "@react-navigation/native";
 import { API_URL } from "@env";
+import Footer from "../components/Footer";
 
 const UserHomePage = ({ route }) => {
   const [events, setEvents] = useState([]);
@@ -21,7 +22,8 @@ const UserHomePage = ({ route }) => {
   const [user, setUser] = useState({});
   const navigation = useNavigation();
 
-  const { userid } = route.params;
+//   const { userid } = route.params;
+    const userid = "674c97be0a39b0ed88f99b11"; 
 
   const fetchEvents = async () => {
     try {
@@ -110,6 +112,7 @@ const UserHomePage = ({ route }) => {
           contentContainerStyle={styles.list}
         />
       )}
+      <Footer navigation={navigation} />
     </View>
   );
 };
