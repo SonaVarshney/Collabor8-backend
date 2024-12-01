@@ -39,14 +39,16 @@ const EventSearchScreen = () => {
   };
 
   const renderEventItem = ({ item }) => (
-    <Card style={styles.card}>
-      <Card.Cover source={{ uri: item.poster }} style={styles.cardImage} />
-      <Card.Content>
-        <Text style={styles.cardTitle}>{item.eventName}</Text>
-        <Text style={styles.cardDescription}>{item.description}</Text>
-        <Text style={styles.cardOrganiser}>Organiser: {item.organiser}</Text>
-      </Card.Content>
-    </Card>
+    <TouchableOpacity onPress={() => navigation.navigate("EventDetails", {id: item._id})}>
+      <Card style={styles.card}>
+        <Card.Cover source={{ uri: item.poster }} style={styles.cardImage} />
+        <Card.Content>
+          <Text style={styles.cardTitle}>{item.eventName}</Text>
+          <Text style={styles.cardDescription}>{item.description}</Text>
+          <Text style={styles.cardOrganiser}>Organiser: {item.organiser}</Text>
+        </Card.Content>
+      </Card>
+    </TouchableOpacity>
   );
 
   useEffect(() => {

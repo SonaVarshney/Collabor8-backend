@@ -105,12 +105,15 @@ const UserHomePage = ({ route }) => {
       ) : events.length === 0 ? (
         <Text style={styles.empty}>No events available</Text>
       ) : (
+        <View>
+        <Text style={{textAlign: 'center', color: 'purple', margin: 10, fontSize: 25, padding: 20, fontWeight: 'bold'}}>Recommended Events for You! </Text>
         <FlatList
           data={events}
           renderItem={renderEventCard}
           keyExtractor={(item) => item._id.toString()}
           contentContainerStyle={styles.list}
         />
+        </View>
       )}
       <Footer navigation={navigation} />
     </View>

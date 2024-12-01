@@ -17,7 +17,8 @@ const SocietyHome = ({ route }) => {
   const [pastEvents, setPastEvents] = useState([]);
   const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
-  const {societyName} = route.params;
+//   const {societyName} = route.params;
+  const societyName = "LeanIn";
 
   useEffect(() => {
     fetchEvents();

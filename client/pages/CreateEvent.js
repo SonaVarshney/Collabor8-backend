@@ -58,7 +58,8 @@ const CreateEvent = () => {
 
       if (response.status === 201) {
         Alert.alert("Success", "Event created successfully!");
-        navigation.pop("SocietyHome"); 
+        // navigation.pop("SocietyHome"); 
+        navigation.navigate("SocietyHome");
       }
     } catch (error) {
       Alert.alert("Error", error.response?.data?.error || error.message);

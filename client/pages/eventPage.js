@@ -100,7 +100,7 @@ const EventPage = ({ route }) => {
 
   
   const generateQRCode = () => {
-    const commonData = "https://example.com"; // Replace with your desired text or URL
+    const commonData = event.groupLink; // Replace with your desired text or URL
     const apiUrl = `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(
       commonData
     )}&size=200x200`;
@@ -130,7 +130,7 @@ const EventPage = ({ route }) => {
               Organised by: {event.organiser}
             </Text>
             <TouchableOpacity onPress={generateQRCode}>
-                <MaterialIcons name="rsvp" size={24} color="black" />
+                <MaterialIcons name="rsvp" size={40} color="black" />
             </TouchableOpacity>
           </View>
         </Card.Content>

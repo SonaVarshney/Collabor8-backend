@@ -19,12 +19,16 @@
     "cors": "^2.8.5",
     "expo": "~52.0.11",
     "expo-dev-client": "~5.0.4",
+    "expo-file-system": "~18.0.4",
+    "expo-gl": "~15.0.2",
     "expo-router": "^4.0.9",
+    "expo-three": "^8.0.0",
     "install": "^0.13.0",
     "metro-react-native-babel-preset": "^0.77.0",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "react-native": "0.76.3",
+    "react-native-confetti-cannon": "^1.5.2",
     "react-native-dotenv": "^3.4.11",
     "react-native-paper": "^5.12.5",
     "react-native-reanimated": "^3.16.3",
@@ -32,7 +36,9 @@
     "react-native-screens": "~4.1.0",
     "react-native-svg": "^15.8.0",
     "react-native-vector-icons": "^10.2.0",
-    "react-native-web": "~0.19.13"
+    "react-native-web": "~0.19.13",
+    "react-three-fiber": "^6.0.13",
+    "three": "^0.166.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
