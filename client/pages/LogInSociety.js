@@ -34,7 +34,9 @@ const LogInSociety = () => {
 
       // Redirect to another page or perform additional actions after login
       // Example: Navigate to the society dashboard
-      navigation.navigate("SocietyDashboard");  // Replace "SocietyDashboard" with your desired screen
+      console.log(response.data.society.socName);
+      navigation.replace("SocietyHome", { societyName: response.data.society.socName });  
+      
     } catch (error) {
       console.error("Login error:", error);
       Alert.alert(

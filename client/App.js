@@ -14,6 +14,7 @@ import CategoryEventsPage from "./pages/CategoryEventsPage";
 import LogInUser from "./pages/LogInUser";
 import LogInSociety from "./pages/LogInSociety";
 import CreateEvent from "./pages/CreateEvent";
+import SocietyHome from "./pages/SocietyHome";
 
 const Stack = createNativeStackNavigator();
 
@@ -30,6 +31,7 @@ export default function App() {
         <Stack.Screen name="CreateEvent" component={CreateEvent} />
         <Stack.Screen name="Categories" component={CategoriesPage} />
         <Stack.Screen name="CategoryEvents" component={CategoryEventsPage} />
+        <Stack.Screen name="SocietyHome" component={SocietyHome} /> 
       </Stack.Navigator>
     </NavigationContainer>
   );

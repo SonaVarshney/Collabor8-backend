@@ -129,3 +129,59 @@ exports.searchEvents = async (req, res) => {
     res.status(500).send({ message: "Internal server error" });
   }
 };
+
+exports.getAllEventsByOrganiser = async (req, res) => {
+  try {
+    const organiser = req.params.organiser;
+
+    const events = await Event.find({ organiser }); 
+
+    if (!events || events.length === 0) {
+      return res.status(404).json({ error: "No events found for this organiser" });
+    }
+
+    res.status(200).json(events);
+  } catch (error) {
+    console.error("Error fetching events by organiser:", error);
+    res.status(500).json({ message: error.message });
+  }
+};
+
+exports.getFutureEventsByOrganiser = async (req, res) => {
+  try {
+    const organiser = req.params.organiser;
+    const today = new Date();
+
+    // Find future events
+    const events = await Event.find({ organiser, date: { $gte: today } });
+
+    if (!events || events.length === 0) {
+      return res.status(404).json({ error: "No future events found for this society" });
+    }
+
+    res.status(200).json(events);
+  } catch (error) {
+    console.error("Error fetching future events:", error);
+    res.status(500).json({ message: error.message });
+  }
+};
+
+exports.getPastEventsByOrganiser = async (req, res) => {
+  try {
+    const organiser = req.params.organiser;
+    const today = new Date();
+
+    // Find past events
+    const events = await Event.find({ organiser, date: { $lt: today } });
+
+    if (!events || events.length === 0) {
+      return res.status(404).json({ error: "No past events found for this society" });
+    }
+
+    res.status(200).json(events);
+  } catch (error) {
+    console.error("Error fetching past events:", error);
+    res.status(500).json({ message: error.message });
+  }
+};
+

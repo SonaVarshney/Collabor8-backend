@@ -9,9 +9,6 @@ router.post("/", eventController.createEvent);
 // Get all events
 router.get("/", eventController.getAllEvents);
 
-// Get all events by an organiser
-router.get("/:organizer", eventController.getAllEventsByOrganizer);
-
 // Get a specific event by ID
 router.get("/:id", eventController.getEventById);
 
@@ -29,5 +26,14 @@ router.get("/tag/:tag", eventController.getEventsByTag);
 
 //Unified search by event name or tags
 router.get("/search", eventController.searchEvents);
+
+// Get all events by socName
+router.get("/organiser/:organiser", eventController.getAllEventsByOrganiser);
+
+// Get future events by society
+router.get("/organiser/:organiser/future", eventController.getFutureEventsByOrganiser);
+
+// Get past events by society
+router.get("/organiser/:organiser/past", eventController.getPastEventsByOrganiser);
 
 module.exports = router;
