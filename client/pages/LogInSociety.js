@@ -24,7 +24,7 @@ const LogInSociety = () => {
     try {
       // Send login request to the backend for society login, but only use the email
       const response = await axios.post(
-        "http://192.168.1.37:3000/api/society/login",
+        "http://192.168.1.5:3000/api/society/login",
         {
           socEmail: email, // Send only the email to the backend
           password, // Sending password but it won't be used by backend

@@ -5,6 +5,7 @@ import axios from 'axios';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import Entypo from '@expo/vector-icons/Entypo';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 const EventPage = ({ route }) => {
     const [event, setEvent] = useState(null);
@@ -87,7 +88,9 @@ const EventPage = ({ route }) => {
                     <Text style={styles.cardDescription}>{event.description}</Text>
                     <View style={styles.textWithIcon}>
                         <Text style={styles.cardOrganiser}>Organised by: {event.organiser}</Text>
-                        <FontAwesome name="comment" size={24} color="black" />
+                        <TouchableOpacity>
+                            <MaterialIcons name="rsvp" size={24} color="black" />
+                        </TouchableOpacity>
                     </View>
                 </Card.Content>
             </Card>

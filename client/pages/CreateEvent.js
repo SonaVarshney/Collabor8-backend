@@ -40,7 +40,7 @@ const CreateEvent = () => {
         organiser: society,
       };
 
-      const response = await axios.post("http://192.168.1.7:3000/api/event", data, {
+      const response = await axios.post("http://192.168.1.:53000/api/event", data, {
         headers: {
           "Content-Type": "application/json",
         },
