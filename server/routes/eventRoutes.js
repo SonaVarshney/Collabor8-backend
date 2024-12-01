@@ -30,4 +30,13 @@ router.get("/tag/:tag", eventController.getEventsByTag);
 //Unified search by event name or tags
 router.get("/search", eventController.searchEvents);
 
+// Get all events by socName
+router.get("/organiser/:organiser", eventController.getAllEventsByOrganiser);
+
+// Get future events by society
+router.get("/organiser/:organiser/future", eventController.getFutureEventsByOrganiser);
+
+// Get past events by society
+router.get("/organiser/:organiser/past", eventController.getPastEventsByOrganiser);
+
 module.exports = router;

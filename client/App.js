@@ -18,6 +18,7 @@ import CategoryEventsPage from "./pages/CategoryEventsPage";
 import LogInUser from "./pages/LogInUser";
 import LogInSociety from "./pages/LogInSociety";
 import CreateEvent from "./pages/CreateEvent";
+import SocietyHome from "./pages/SocietyHome";
 import QRCodeGenerator from "./pages/dummy_QR";
 
 const Stack = createNativeStackNavigator();
@@ -91,8 +92,13 @@ export default function App() {
                 style={styles.tinyLogo}
               />
             ),
+            headerShown: false
           }}
+          
         />
+        <Stack.Screen name="SocietyHome" component={SocietyHome} 
+          options={{ headerShown: false }}
+        /> 
       </Stack.Navigator>
     </NavigationContainer>
   );
