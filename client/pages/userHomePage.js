@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, ActivityIndicator, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import axios from 'axios';
 import { Card } from 'react-native-paper';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
+import Entypo from '@expo/vector-icons/Entypo';
+
 
 const UserHomePage = ({navigation}) => {
     const [events, setEvents] = useState([]);
@@ -21,14 +24,14 @@ const UserHomePage = ({navigation}) => {
             setUser(response.data);
             tags = await response.data.interestedTags;
             if (tags.length === 0) {
-                const data = await axios.get(`http://localhost:3000/api/event`);
+                const data = await axios.get(`http://192.168.1.5:3000/api/event`);
                 setEvents(data.data);
             }
             else {
                 //Initialize events set to avoid duplicates
                 let tempEvents = new Set();
                 for (let i = 0; i < tags.length; i++) {
-                    const data = await axios.get(`http://localhost:3000/api/event/tag/${tags[i].toLowerCase()}`);
+                    const data = await axios.get(`http://192.168.1.5:3000/api/event/tag/${tags[i].toLowerCase()}`);
                     const eventData = await data.data;
 
                     // Add events to the set
@@ -52,11 +55,15 @@ const UserHomePage = ({navigation}) => {
         // Click on the event card to view the event details
         <TouchableOpacity onPress={() => navigation.navigate('EventDetails', { id: item._id })}>
             <Card style={styles.card}>
+                <Entypo name="dots-three-horizontal" size={18} color="black" style={styles.alignRightIcon}/>
                 <Card.Cover source={{ uri: item.poster }} style={styles.cardImage} />
                 <Card.Content>
                     <Text style={styles.cardTitle}>{item.eventName}</Text>
                     <Text style={styles.cardDescription}>{item.description}</Text>
-                    <Text style={styles.cardOrganiser}>Organised by: {item.organiser}</Text>
+                    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
+                        <Text style={styles.cardOrganiser}>Organised by: {item.organiser}</Text>
+                        <FontAwesome name="comment" size={24} color="black" />            
+                    </View>
                 </Card.Content>
             </Card>
         </TouchableOpacity>
@@ -127,6 +134,12 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: "gray",
     },
+    alignRightIcon: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        margin: 5
+    }
 });
 
 export default UserHomePage;
