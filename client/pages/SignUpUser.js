@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
+import { API_URL } from "@env";
 
 const SignUp = () => {
   const [name, setName] = useState("");
@@ -18,7 +19,7 @@ const SignUp = () => {
   const [branch, setBranch] = useState("");
   const [year, setYear] = useState("");
   const [interestedTags, setInterestedTags] = useState("");
-  const navigation = useNavigation(); 
+  const navigation = useNavigation();
 
   const handleSignUp = async () => {
     if (
@@ -34,7 +35,7 @@ const SignUp = () => {
     }
 
     try {
-      const response = await axios.post("http://192.168.1.7:3000/api/user/", {
+      const response = await axios.post(`${API_URL}/api/user/`, {
         name,
         collegeEmail,
         password,

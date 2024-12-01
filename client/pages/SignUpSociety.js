@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native"; // Import useNavigation
+import { API_URL } from "@env";
 
 const SocietySignUp = () => {
   const [socName, setSocName] = useState("");
@@ -24,18 +25,15 @@ const SocietySignUp = () => {
     }
 
     try {
-      const response = await axios.post(
-        "http://192.168.1.7:3000/api/society/",
-        {
-          socName,
-          description,
-          socialLinks: socialLinks.split(",").map((link) => link.trim()),
-          socEmail,
-        }
-      );
+      const response = await axios.post(`${API_URL}/api/society/`, {
+        socName,
+        description,
+        socialLinks: socialLinks.split(",").map((link) => link.trim()),
+        socEmail,
+      });
 
       Alert.alert("Success", "Society registered successfully!");
-      
+
       // Redirect to login screen after successful signup
       navigation.navigate("LogInSociety"); // Replace with your actual login screen name
     } catch (error) {

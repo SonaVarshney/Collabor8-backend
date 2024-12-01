@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { View, StyleSheet, FlatList } from "react-native";
 import EventCard from "../components/EventCard";
+import { API_URL } from "@env";
 
-const API_URL = "http://192.168.21.72:3000/api/event/";
+const API_URLL = `${API_URL}/api/event/`;
 
 const CategoryEventsPage = ({ route }) => {
   const { category } = route.params;
@@ -14,7 +15,7 @@ const CategoryEventsPage = ({ route }) => {
 
   const fetchEvents = async () => {
     try {
-      const response = await fetch(API_URL);
+      const response = await fetch(API_URLL);
       const data = await response.json();
       const filteredEvents = filterEventsByCategory(data, category);
       setEvents(filteredEvents);
@@ -62,7 +63,8 @@ export default CategoryEventsPage;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
+    padding: 30,
+    marginTop: 40,
     backgroundColor: "#F8F9FA",
   },
 });

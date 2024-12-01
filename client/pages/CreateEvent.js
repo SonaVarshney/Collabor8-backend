@@ -10,11 +10,12 @@ import {
 } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import axios from "axios";
+import { API_URL } from "@env";
 
 const CreateEvent = () => {
   const [eventName, setEventName] = useState("");
   const [date, setDate] = useState(new Date());
-  const [showDatePicker, setShowDatePicker] = useState(false); 
+  const [showDatePicker, setShowDatePicker] = useState(false);
   const [location, setLocation] = useState("");
   const [poster, setPoster] = useState("");
   const [groupLink, setGroupLink] = useState("");
@@ -23,7 +24,14 @@ const CreateEvent = () => {
   const [society, setSociety] = useState("");
 
   const handleCreateEvent = async () => {
-    if (!eventName || !date || !location || !poster || !description || !society) {
+    if (
+      !eventName ||
+      !date ||
+      !location ||
+      !poster ||
+      !description ||
+      !society
+    ) {
       Alert.alert("Error", "Please fill in all required fields.");
       return;
     }
@@ -31,7 +39,7 @@ const CreateEvent = () => {
     try {
       const data = {
         eventName,
-        date: date.toISOString(), 
+        date: date.toISOString(),
         location,
         poster,
         groupLink,
@@ -40,7 +48,7 @@ const CreateEvent = () => {
         organiser: society,
       };
 
-      const response = await axios.post("http://192.168.1.7:3000/api/event", data, {
+      const response = await axios.post(`${API_URL}/api/event`, data, {
         headers: {
           "Content-Type": "application/json",
         },

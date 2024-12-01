@@ -9,11 +9,12 @@ import {
 } from "react-native";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
+import { API_URL } from "@env";
 
 const LogInSociety = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState(""); // Keep password input but not use it for backend
-  const navigation = useNavigation(); 
+  const navigation = useNavigation();
 
   const handleLogin = async () => {
     if (!email) {
@@ -23,7 +24,7 @@ const LogInSociety = () => {
 
     try {
       // Send login request to the backend for society login, but only use the email
-      const response = await axios.post("http://192.168.1.7:3000/api/society/login", {
+      const response = await axios.post(`${API_URL}/api/society/login`, {
         socEmail: email, // Send only the email to the backend
         password, // Sending password but it won't be used by backend
       });
@@ -41,7 +42,8 @@ const LogInSociety = () => {
       console.error("Login error:", error);
       Alert.alert(
         "Error",
-        error.response?.data?.message || "Unable to authenticate. Please try again."
+        error.response?.data?.message ||
+          "Unable to authenticate. Please try again."
       );
     }
   };

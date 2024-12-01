@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
+import { API_URL } from "@env";
 
 const SocietyHome = ({ route }) => {
   const [upcomingEvents, setUpcomingEvents] = useState([]);
@@ -27,7 +28,7 @@ const SocietyHome = ({ route }) => {
     try {
         console.log(societyName);
       const response = await axios.get(
-        `http://192.168.1.7:3000/api/event/organiser/${societyName}`
+        `${API_URL}/api/event/organiser/${societyName}`
       );
       const events = response.data;
 
